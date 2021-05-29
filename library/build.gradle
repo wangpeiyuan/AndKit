@@ -36,7 +36,10 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.androidx.appcompat
     implementation deps.androidx.coreKtx
+    implementation deps.androidx.lifecycleProcess
     implementation deps.android.material
+
+    implementation deps.third.toastcompat
 
     testImplementation deps.test.testJunit
     androidTestImplementation deps.test.testJunitExt
