@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
 }
 
+// JitPack Maven
+apply plugin: 'com.github.dcendents.android-maven'
+// Your Group
+group='com.github.wangpeiyuan'
+
 android {
     compileSdkVersion build_versions.compile_sdk
     buildToolsVersion build_versions.build_tools
