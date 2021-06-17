@@ -1,4 +1,4 @@
-package com.yuan.andkit
+package com.yuan.andkit.utils
 
 import android.os.SystemClock
 import android.view.View

@@ -1,4 +1,4 @@
-package com.yuan.andkit
+package com.yuan.andkit.utils
 
 import android.util.Log
 import androidx.lifecycle.Lifecycle
