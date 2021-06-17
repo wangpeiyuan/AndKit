@@ -14,6 +14,6 @@ allprojects {
 在项目的 `build.gradle` 中添加
 ```
 dependencies {
-    implementation 'com.github.wangpeiyuan:AndKit:v0.0.2'
+    implementation 'com.github.wangpeiyuan:AndKit:0.0.2'
 }
 ```
