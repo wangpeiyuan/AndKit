@@ -72,7 +72,6 @@ class GestureHelper private constructor(context: Context, onGestureListener: OnG
 
     init {
         mGestureDetector = GestureDetector(context, GestureListener(), null, true)
-        mGestureDetector.setIsLongpressEnabled(false)
         mScaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
         mRotationGestureDetector = RotationGestureDetector(RotateListener())
 
@@ -133,6 +132,13 @@ class GestureHelper private constructor(context: Context, onGestureListener: OnG
             return super.onDoubleTap(e)
         }
 
+        override fun onLongPress(e: MotionEvent) {
+            mOnGestureListener?.let {
+                mIsHandleGesture = true
+                it.onLongPress(e)
+            }
+        }
+
         override fun onScroll(
             e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float
         ): Boolean {
@@ -145,7 +151,7 @@ class GestureHelper private constructor(context: Context, onGestureListener: OnG
                     val deltaX = e2.x - e1.x
                     val deltaY = e2.y - e1.y
                     if (abs(deltaX) > mSwipeThreshold || abs(deltaY) > mSwipeThreshold) {
-                        it.onTranslate(-distanceX, -distanceY, e1.x, e1.y, e2.x, e2.y)
+                        it.onTranslate(-distanceX, -distanceY, e1, e2)
                     }
                 }
             }
@@ -217,18 +223,17 @@ interface OnGestureListener {
      */
     fun onDoubleTouch(px: Float, py: Float) = Unit
 
+    fun onLongPress(e: MotionEvent) = Unit
+
     /**
      * 移动事件
-     * @param deltaX     x 轴移动的距离
-     * @param deltaY     y 轴移动的距离
-     * @param startX     起始点的 x 坐标
-     * @param startY     起始点的 y 坐标
-     * @param translateX 移动到点的 x 坐标
-     * @param translateY 移动到点的 y 坐标
+     * @param deltaX x 轴移动的距离
+     * @param deltaY y 轴移动的距离
+     * @param e1     起始点
+     * @param e2     移动到点
      */
     fun onTranslate(
-        deltaX: Float, deltaY: Float, startX: Float, startY: Float,
-        translateX: Float, translateY: Float
+        deltaX: Float, deltaY: Float, e1: MotionEvent, e2: MotionEvent
     ) = Unit
 
     fun onDoubleTranslate(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float) =
